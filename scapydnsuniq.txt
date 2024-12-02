@@ -1,0 +1,376 @@
+# !/usr/bin/env python3
+import scapy.all as scapy
+from scapy.layers.http import *
+from scapy.layers.inet import TCP, IP, UDP
+from scapy.layers.tls.all import *
+from scapy.layers.tls.record import *
+import time
+from collections import defaultdict
+import socket
+from datetime import datetime
+import argparse
+import csv
+import os
+import psutil
+import pwd
+
+def get_process_by_connection(local_addr, local_port, remote_addr, remote_port):
+    """Get process information for a connection"""
+    try:
+        # Convert addresses to strings if they aren't already
+        local_addr = str(local_addr)
+        remote_addr = str(remote_addr)
+        
+        for proc in psutil.process_iter(['pid', 'name', 'username']):
+            try:
+                name = proc.name()
+                pid = proc.pid
+                username = proc.username()
+                
+                # Get connections separately
+                connections = proc.connections(kind='inet')
+                
+                for conn in connections:
+                    if conn.status == 'ESTABLISHED' and conn.laddr and conn.raddr:
+                        # Check both directions of the connection
+                        if ((str(conn.laddr.ip) == local_addr and 
+                             conn.laddr.port == local_port and 
+                             str(conn.raddr.ip) == remote_addr and 
+                             conn.raddr.port == remote_port) or
+                            (str(conn.laddr.ip) == remote_addr and 
+                             conn.laddr.port == remote_port and 
+                             str(conn.raddr.ip) == local_addr and 
+                             conn.raddr.port == local_port)):
+                            
+                            return {
+                                'name': name,
+                                'pid': pid,
+                                'owner': username
+                            }
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess, Exception) as e:
+                continue
+    except Exception as e:
+        print(f"Debug - Error getting process info: {e}")
+    
+    return {'name': 'Unknown', 'pid': 'N/A', 'owner': 'Unknown'}
+
+def build_protocol_dictionary(log_file):
+    """Build dictionary of process:port mappings and log to main CSV file"""
+    process_port_dict = {}
+    
+    # Log all current process:port mappings first
+    with open(log_file, 'a', newline='') as f:
+        writer = csv.writer(f)
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
+        for proc in psutil.process_iter(['pid', 'name', 'username']):
+            try:
+                connections = proc.net_connections(kind='inet')
+                proc_name = proc.name().lower()
+                username = proc.info['username']
+                
+                for conn in connections:
+                    if conn.laddr:
+                        # Log initial mapping to CSV
+                        writer.writerow([
+                            timestamp,
+                            f"PROCESS_MAPPING",
+                            "INITIAL",
+                            conn.laddr.ip,
+                            get_dns_name(conn.laddr.ip),
+                            conn.laddr.port,
+                            "N/A",
+                            "N/A",
+                            proc_name,
+                            username,
+                            proc.pid
+                        ])
+                        
+                        process_port_dict[conn.laddr.port] = {
+                            'name': proc_name,
+                            'username': username
+                        }
+                        
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                continue
+    
+    return process_port_dict
+
+def get_protocol_info(packet, process_port_dict):
+    """Get protocol information from packet"""
+    protocols = []
+    process_info = {'name': None, 'username': None}
+    
+    # Layer 3 protocols
+    if IP in packet:
+        protocols.append("IPv4")
+    elif IPv6 in packet:
+        protocols.append("IPv6")
+    
+    # Layer 4 protocols and process info
+    if TCP in packet:
+        protocols.append("TCP")
+        tcp = packet[TCP]
+        if tcp.sport in process_port_dict:
+            process_info = process_port_dict[tcp.sport]
+            protocols.append(process_info['name'].upper())
+        elif tcp.dport in process_port_dict:
+            process_info = process_port_dict[tcp.dport]
+            protocols.append(process_info['name'].upper())
+    elif UDP in packet:
+        protocols.append("UDP")
+        udp = packet[UDP]
+        if udp.sport in process_port_dict:
+            process_info = process_port_dict[udp.sport]
+            protocols.append(process_info['name'].upper())
+        elif udp.dport in process_port_dict:
+            process_info = process_port_dict[udp.dport]
+            protocols.append(process_info['name'].upper())
+    
+    # Remove duplicates while preserving order
+    seen = set()
+    protocols = [x for x in protocols if not (x in seen or seen.add(x))]
+    
+    return ', '.join(protocols), process_info
+
+def get_connection_type(packet):
+    """Analyze packet to determine connection type"""
+    connection_type = []
+    
+    if TCP in packet:
+        tcp = packet[TCP]
+        flags = []
+        
+        # TCP Flags analysis
+        if tcp.flags.S:
+            flags.append("SYN")
+        if tcp.flags.A:
+            flags.append("ACK")
+        if tcp.flags.F:
+            flags.append("FIN")
+        if tcp.flags.R:
+            flags.append("RST")
+        if tcp.flags.P:
+            flags.append("PSH")
+        
+        if flags:
+            connection_type.append("-".join(flags))
+        
+        # TLS Detection
+        if tcp.dport == 443 or tcp.sport == 443:
+            if Raw in packet:
+                raw_data = packet[Raw].load
+                if len(raw_data) > 0 and raw_data[0] == 22:
+                    if len(raw_data) > 5:
+                        if raw_data[5] == 1:
+                            connection_type.append("TLS_ClientHello")
+                        elif raw_data[5] == 2:
+                            connection_type.append("TLS_ServerHello")
+    
+    return ', '.join(connection_type) if connection_type else "OTHER"
+
+def monitor_network(log_file, filters, debug_mode=False, expire_time=60, excluded_processes=[], interface=None):
+    seen_connections = {}
+    process_port_dict = build_protocol_dictionary(log_file)
+    
+    print(f"Monitoring network traffic...")
+    print(f"Initial process mappings logged to {log_file}")
+    print(f"Interface: {interface if interface else 'all'}")
+    print(f"Connection expiry time: {expire_time} seconds")
+    print(f"Filters: {filters}")
+    if excluded_processes:
+        print(f"Excluding processes: {', '.join(excluded_processes)}")
+    print_headers()
+    
+    callback = lambda pkt: packet_callback(pkt, process_port_dict, seen_connections, expire_time)
+    scapy.sniff(prn=callback, store=0, iface=interface)
+
+def get_dns_name(ip):
+    try:
+        if ip == 'None' or ip == '':
+            return 'None'
+        return socket.gethostbyaddr(ip)[0]
+    except (socket.herror, socket.gaierror):
+        return 'Unknown'
+
+def setup_log_file():
+    # Create logs directory if it doesn't exist
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
+    
+    # Create filename with timestamp
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    log_file = f'logs/network_monitor_{timestamp}.csv'
+    
+    # Create and setup CSV file with headers
+    headers = [
+        'Timestamp',
+        'Protocol',
+        'Connection_Type',
+        'Local_Address',
+        'Local_DNS',
+        'Local_Port',
+        'Remote_Address',
+        'Remote_DNS',
+        'Remote_Port',
+        'Process_Name',
+        'Process_Owner',
+        'PID'
+    ]
+    
+    with open(log_file, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+    
+    return log_file
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Monitor network connections')
+    parser.add_argument(
+        '--filter',
+        nargs='+',
+        choices=['ALL', 'ESTABLISHED', 'TCP', 'UDP', 'NO_UNKNOWN', 'NO_LISTEN', 'NO_WAIT'],
+        default=['ALL'],
+        help='Filter connections by multiple criteria (e.g., --filter TCP NO_UNKNOWN NO_LISTEN)'
+    )
+    parser.add_argument(
+        '--exclude-process',
+        nargs='+',
+        default=[],
+        help='Exclude connections from specified process names (e.g., --exclude-process sleep chrome)'
+    )
+    parser.add_argument(
+        '--debug',
+        action='store_true',
+        help='Enable debug mode for TCP connections'
+    )
+    parser.add_argument(
+        '--expire',
+        type=int,
+        default=60,
+        help='Time in seconds to remember connections before logging them again (default: 60, 0 for never expire)'
+    )
+    parser.add_argument(
+        '--interface',
+        type=str,
+        default=None,
+        help='Network interface to monitor (default: all interfaces)'
+    )
+    return parser.parse_args()
+
+def print_headers():
+    headers = [
+        'Timestamp',
+        'Protocol',
+        'Connection_Type',
+        'Local_Address',
+        'Local_DNS',
+        'Local_Port',
+        'Remote_Address',
+        'Remote_DNS',
+        'Remote_Port',
+        'Process_Name',
+        'Process_Owner',
+        'PID'
+    ]
+    print(','.join(headers))
+    print('-' * 140)
+
+def packet_callback(packet, process_port_dict, seen_connections, expire_time):
+    """Callback function to process each captured packet"""
+    if IP in packet:
+        timestamp = datetime.now()
+        ip = packet[IP]
+        
+        if TCP in packet or UDP in packet:
+            if TCP in packet:
+                transport = packet[TCP]
+            else:
+                transport = packet[UDP]
+            
+            # Create a more comprehensive unique identifier
+            conn_id = f"{protocol}|{ip.src}:{transport.sport}|{ip.dst}:{transport.dport}|{process_name}|{proc_info['pid']}"
+            
+            # Check if we've seen this connection recently
+            current_time = time.time()
+            if conn_id in seen_connections:
+                if expire_time == 0 or current_time - seen_connections[conn_id] < expire_time:
+                    return  # Skip logging if connection was logged recently or expire_time is 0
+            
+            # Update the last seen time for this connection
+            seen_connections[conn_id] = current_time
+            
+            # Rest of your existing logging code...
+            timestamp_str = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+            
+            # Try both directions of the connection since we don't know which is local/remote
+            possible_connections = [
+                (ip.src, transport.sport, ip.dst, transport.dport),
+                (ip.dst, transport.dport, ip.src, transport.sport)
+            ]
+            
+            proc_info = None
+            # Try both connection directions to find the process
+            for local_addr, local_port, remote_addr, remote_port in possible_connections:
+                proc_info = get_process_by_connection(local_addr, local_port, remote_addr, remote_port)
+                if proc_info['name'] != 'Unknown':
+                    # We found the process, use this connection direction
+                    break
+            
+            if proc_info is None:
+                proc_info = {'name': 'Unknown', 'pid': 'N/A', 'owner': 'Unknown'}
+            
+            # Get protocol and connection type info from Scapy packet
+            protocol, process_info = get_protocol_info(packet, process_port_dict)
+            conn_type = get_connection_type(packet)
+            
+            # If we found process info from the port mapping, use it
+            if process_info['name'] and process_info['username']:
+                process_name = process_info['name']
+                username = process_info['username']
+            else:
+                # Fall back to existing process detection
+                proc_info = get_process_by_connection(local_addr, local_port, remote_addr, remote_port)
+                process_name = proc_info['name']
+                username = proc_info['owner']
+            
+            # Resolve DNS names
+            local_dns = get_dns_name(local_addr)
+            remote_dns = get_dns_name(remote_addr)
+            
+            # Update connection details with DNS names
+            connection_details = [
+                timestamp_str,
+                protocol,
+                conn_type,
+                local_addr,
+                local_dns,
+                str(local_port),
+                remote_addr,
+                remote_dns,
+                str(remote_port),
+                process_name,
+                username,
+                str(proc_info['pid'])
+            ]
+            print(','.join(connection_details))
+            
+            # Log to file
+            with open(log_file, 'a', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(connection_details)
+
+if __name__ == "__main__":
+    args = parse_arguments()
+    print("Starting network connection monitoring...")
+    print("Press Ctrl+C to stop")
+    log_file = setup_log_file()
+    print(f"Logging to: {log_file}")
+    monitor_network(
+        log_file, 
+        args.filter, 
+        args.debug, 
+        args.expire, 
+        args.exclude_process,
+        args.interface
+    )
