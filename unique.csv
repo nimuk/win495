@@ -1,0 +1,94 @@
+Timestamp,Protocol,Connection_Type,Local_Address,Local_DNS,Local_Port,Remote_Address,Remote_DNS,Remote_Port,Process_Name,Process_Owner,PID
+2024-12-01 10:08:04,"IPv4, TCP, SSHD",ACK,10.232.135.174,Unknown,50804,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,22,sshd,mukherjeen_eng,735448
+2024-12-01 10:08:04,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,43838,Unknown,Unknown,N/A
+2024-12-01 10:08:04,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,43838,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:04,"IPv4, TCP, SSHD",ACK-PSH,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,22,10.232.135.174,Unknown,50804,sshd,mukherjeen_eng,735448
+2024-12-01 10:08:04,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,51290,Unknown,Unknown,N/A
+2024-12-01 10:08:04,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,51290,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:04,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,43468,Unknown,Unknown,N/A
+2024-12-01 10:08:05,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,43468,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:05,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54744,Unknown,Unknown,N/A
+2024-12-01 10:08:05,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54744,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:05,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,38630,Unknown,Unknown,N/A
+2024-12-01 10:08:05,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,38630,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:06,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,35172,Unknown,Unknown,N/A
+2024-12-01 10:08:06,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,35172,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:06,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.161,ldtpsr02z03856.etf.barcapetf.com,47444,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:06,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,17472,10.123.198.161,ldtpsr02z03856.etf.barcapetf.com,47444,taniumclient,root,762396
+2024-12-01 10:08:06,"IPv4, TCP, TANIUMCLIENT",ACK,10.123.198.161,ldtpsr02z03856.etf.barcapetf.com,47444,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:06,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,56471,Unknown,Unknown,N/A
+2024-12-01 10:08:06,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,56471,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:07,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,45047,Unknown,Unknown,N/A
+2024-12-01 10:08:07,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,45047,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:07,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54400,Unknown,Unknown,N/A
+2024-12-01 10:08:07,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54400,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:07,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,57105,Unknown,Unknown,N/A
+2024-12-01 10:08:07,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,57105,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:08,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,34296,10.123.198.161,ldtpsr02z03856.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:08,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.161,ldtpsr02z03856.etf.barcapetf.com,17472,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,34296,taniumclient,root,762396
+2024-12-01 10:08:08,"IPv4, TCP, TANIUMCLIENT",ACK,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,34296,10.123.198.161,ldtpsr02z03856.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:08,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,53940,10.123.198.143,ldtpsr02z03841.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:08,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.143,ldtpsr02z03841.etf.barcapetf.com,17472,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,53940,taniumclient,root,762396
+2024-12-01 10:08:08,"IPv4, TCP, TANIUMCLIENT",ACK,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,53940,10.123.198.143,ldtpsr02z03841.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:08,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,40067,Unknown,Unknown,N/A
+2024-12-01 10:08:08,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,40067,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:08,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,44891,Unknown,Unknown,N/A
+2024-12-01 10:08:09,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,44891,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:09,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54428,Unknown,Unknown,N/A
+2024-12-01 10:08:09,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54428,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:09,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.143,ldtpsr02z03841.etf.barcapetf.com,56658,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:09,"IPv4, TCP, TANIUMCLIENT",ACK-PSH,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,17472,10.123.198.143,ldtpsr02z03841.etf.barcapetf.com,56658,taniumclient,root,762396
+2024-12-01 10:08:10,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,60453,Unknown,Unknown,N/A
+2024-12-01 10:08:10,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,60453,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:10,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,53870,Unknown,Unknown,N/A
+2024-12-01 10:08:10,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,53870,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:11,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,45185,Unknown,Unknown,N/A
+2024-12-01 10:08:11,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,45185,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:12,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54578,Unknown,Unknown,N/A
+2024-12-01 10:08:12,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54578,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:12,"IPv4, UDP, GMOND",OTHER,10.145.64.83,nykpsr000011940.intranet.barcapint.com,8649,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,59293,gmond,ganglia,N/A
+2024-12-01 10:08:12,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,52230,Unknown,Unknown,N/A
+2024-12-01 10:08:12,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,52230,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:13,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,37646,Unknown,Unknown,N/A
+2024-12-01 10:08:13,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,37646,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:13,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,39545,Unknown,Unknown,N/A
+2024-12-01 10:08:13,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,39545,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:14,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",SYN,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,10.123.173.133,Unknown,41960,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:14,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",SYN-ACK,10.123.173.133,Unknown,41960,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:14,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",ACK,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,10.123.173.133,Unknown,41960,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:14,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",ACK-PSH,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,10.123.173.133,Unknown,41960,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:14,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",ACK,10.123.173.133,Unknown,41960,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:14,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",ACK-PSH,10.123.173.133,Unknown,41960,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:15,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",ACK-FIN,10.123.173.133,Unknown,41960,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:15,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",ACK-FIN,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,10.123.173.133,Unknown,41960,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:15,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",ACK-RST,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,10.123.173.133,Unknown,41960,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:15,"IPv4, TCP, BOOTSTRAP_AGENT_MAIN",RST,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,12800,10.123.173.133,Unknown,41960,bootstrap_agent_main,root,N/A
+2024-12-01 10:08:16,"IPv4, TCP, TANIUMCLIENT",ACK,10.123.198.143,ldtpsr02z03841.etf.barcapetf.com,56658,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,17472,taniumclient,root,762396
+2024-12-01 10:08:16,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,56262,Unknown,Unknown,N/A
+2024-12-01 10:08:16,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,56262,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:16,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,36330,Unknown,Unknown,N/A
+2024-12-01 10:08:16,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,36330,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:17,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54246,Unknown,Unknown,N/A
+2024-12-01 10:08:17,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54246,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:17,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54971,Unknown,Unknown,N/A
+2024-12-01 10:08:17,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,54971,10.125.189.22,ldtdsi002.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:17,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,34616,Unknown,Unknown,N/A
+2024-12-01 10:08:17,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,34616,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:18,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,58379,Unknown,Unknown,N/A
+2024-12-01 10:08:18,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,58379,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:18,"IPv4, TCP, SSHD",ACK-PSH,10.232.135.174,Unknown,50804,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,22,sshd,mukherjeen_eng,735448
+2024-12-01 10:08:18,"IPv4, UDP",OTHER,30.4.1.2,ldnsls03.ldn.bzwint.com,123,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,49700,Unknown,Unknown,N/A
+2024-12-01 10:08:18,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,37233,Unknown,Unknown,N/A
+2024-12-01 10:08:19,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,37233,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:19,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,51997,Unknown,Unknown,N/A
+2024-12-01 10:08:19,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,51997,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:19,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,57431,Unknown,Unknown,N/A
+2024-12-01 10:08:19,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,57431,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:20,"IPv4, UDP",OTHER,10.125.189.22,platformntp.etf.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,59871,Unknown,Unknown,N/A
+2024-12-01 10:08:20,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,59871,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:20,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,34189,Unknown,Unknown,N/A
+2024-12-01 10:08:20,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,34189,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:21,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,59279,Unknown,Unknown,N/A
+2024-12-01 10:08:21,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,59279,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
+2024-12-01 10:08:21,"IPv4, UDP",OTHER,10.125.189.22,ldtdsi002.barcapetf.com,53,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,35086,Unknown,Unknown,N/A
+2024-12-01 10:08:21,"IPv4, UDP",OTHER,10.123.198.159,ldtpsr02z03855.etf.barcapetf.com,35086,10.125.189.22,platformntp.etf.barcapetf.com,53,Unknown,Unknown,N/A
